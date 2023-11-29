@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
+        }
+    </style>
+</head>
+
+<body class="">
+    <div class="flex flex-col items-center justify-center mb-22">
+        <h1 class="text-[60px]">Rude Guy</h1>
+        <p>
+            Welcome to my very very rude website.
+        </p>
+    </div>
+
+    <div class="flex flex-col items-center justify-center space-y-4 pt-12 ">
+
+        <div class="w-[300px] sm:w-[500px] lg:w-[700px] xl:w-[900px] h-[400px] overflow-y-scroll no-scrollbar flex flex-col-reverse">
+            <div class="space-y-6 flex flex-col justify-end">
+                {% for message in chat_history %}
+                <div>
+                    {% if message.role == 'user' %}
+                    <p class="bg-teal-100 text-black p-2 rounded-lg ml-6  text-lg">{{ message.content }}</p>
+                    {% elif message.role == 'assistant' %}
+                    <p class="bg-cyan-100 text-black p-2 rounded-lg mr-6 text-lg">{{ message.content }}</p>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+
+        <form method="post" action="{{ url_for('home') }}" class="w-[300px] sm:w-[500px] lg:w-[700px] xl:w-[900px] ">
+            <label for="user_message" class="text-lg">Type something:</label>
+            <div class="flex flex-row space-x-12 pt-2">
+                <input type="text" id="user_message" name="user_message"
+                    class=" block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    required>
+                <button type="submit"
+                    class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">Send</button>
+            </div>
+        </form>
+
+    </div>
+
+</body>
+
+</html>
