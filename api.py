@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 import json
 from openai import OpenAI
-client = OpenAI(api_key="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")
+client = OpenAI(api_key="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")
 
 
 app = Flask(__name__, template_folder='templates')
